@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic & Research Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* Portfolio Header Banner */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.2);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: #93c5fd;
+            font-size: 1.2rem;
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Main Grid Architecture */
+        .portfolio-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .portfolio-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Logical Block Components */
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .box h2 {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        /* About Me Styling */
+        .about-text {
+            color: #475569;
+            font-size: 1.05rem;
+        }
+
+        /* Interactive Education Timeline Component */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            border-left: 3px solid #dbeafe;
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 6px;
+            background: #2563eb;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #bfdbfe;
+        }
+
+        /* Special Styling for Expected Graduation milestone */
+        .timeline-item.expected::before {
+            background: #10b981;
+            box-shadow: 0 0 0 3px #a7f3d0;
+        }
+
+        .time-period {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2563eb;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-item.expected .time-period {
+            color: #10b981;
+        }
+
+        .timeline-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 2px 0;
+        }
+
+        .timeline-institution {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        /* Enhanced Project Display Cards */
+        .project-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-img-link {
+            display: block;
+            overflow: hidden;
+        }
+
+
+        .project-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+
+        .project-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-details h3 {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .project-details p {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .project-tags span {
+            background: #eff6ff;
+            color: #1e40af;
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: 1px solid #dbeafe;
+        }
+
+        /* Professional Categorized Skills Badges */
+        .skill-group {
+            margin-bottom: 20px;
+        }
+
+        .skill-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-group h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Generic clean list formatting for sidebar modules */
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Quick Contact Links Block */
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #475569;
+            text-decoration: none;
+        }
+
+        .contact-link-item:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 24px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header Block -->
+    <header>
+        <img src="Images/Niek.jpeg" alt="Niek Wels" class="header-photo">
+        <div class="header-text">
+            <h1>Niek Wels</h1>
+            <p>Student | Geograhic Information Science</p>
+        </div>
+    </header>
+
+    <!-- Unified Portfolio Workspace -->
+    <div class="portfolio-layout">
+        
+        <!-- Left Column: Primary Milestones & Work -->
+        <main class="main-content">
+            
+            <!-- About Section -->
+            <section class="box">
+                <h2>Brief Abstract / About Me</h2>
+                <p class="about-text">
+                    Trying to keep overseight in complex procedures and look for effictient opertunities.
+                    This combined with my social nature. I get energy from meeting people.
+                </p>
+            </section>
+
+            <!-- Education Timeline Block -->
+            <section class="box">
+                <h2>Academic Roadmap</h2>
+                <div class="timeline">
+                    
+                    <!-- Expected Graduation Highlight -->
+                    <div class="timeline-item expected">
+                        <div class="time-period">Expected Graduation: June 2027</div>
+                        <div class="timeline-title">MSc Geograhic Information Science</div>
+                        <div class="timeline-institution">Wageningen Univeristy & Research, Gelderland</div>
+                    </div>
+
+                    <!-- Current/Previous Degree -->
+                    <div class="timeline-item">
+                        <div class="time-period">2022 — 2025</div>
+                        <div class="timeline-title">BSc Human Geography and Spatial Planning</div>
+                        <div class="timeline-institution">Utrecht Univeristy, Utrecht</div>
+                    </div>
+
+                    <!-- Previous Degree/Milestone -->
+                    <div class="timeline-item">
+                        <div class="time-period">2016 — 2022</div>
+                        <div class="timeline-title">VWO Atheneum E&M and C&M</div>
+                        <div class="timeline-institution">van Maerlant Lyceum / Eindhoven</div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Detailed Visual Project Portfolio Box -->
+            <section class="box">
+                <h2>Selected Research & Projects</h2>
+                
+                <!-- Project Node 1 -->
+                <div class="project-card">
+                    <a class="project-img-link" href="Images/New improved image maup.png" target="_blank">
+                        <img class="project-img" src="Images/New improved image maup.png" alt="MAUP Project Visual">
+                    </a>
+                    <div class="project-details">
+                        <div>
+                            <h3>What effects does the Modifiable Areal Unit Problem (MAUP) have on Soil Organic Carbon data in Flevoland?</h3>
+                            <p>Investigated how aggregating soil organic carbon (SOC) data from 30m pixels to larger spatial units introduces systematic errors. Analysed both scale effects — at 5000m resolution nearly 50% of data variance is lost, following a roughly exponential relationship — and zonal effects, where random polygon boundaries cause certain agricultural fields to be consistently over- or underestimated. Results directly impact farmer subsidies and carbon credit calculations, highlighting why policymakers must be cautious with spatially aggregated data.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>GeoScripting</span>
+                            <span>Spatial Analysis</span>
+                            <span>Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Node 2 -->
+                <div class="project-card">
+                    <a class="project-img-link" href="Images/Screenshot_geotools.jpg" target="_blank">
+                        <img class="project-img" src="Images/Screenshot_geotools.jpg" alt="Light Rail GeoTools Screenshot">
+                    </a>
+                    <div class="project-details">
+                        <div>
+                            <h3>Light Rail Project Wageningen Rhenen</h3>
+                            <p>Looked for the cheapest route to build a lightrail while taking environemental constraints into account</p>
+                        </div>
+                        <div class="project-tags">
+                            <span>ArcGIS Pro</span>
+                            <span>Toolboxes</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- Right Column: Focus Matrix & Supporting Info -->
+        <aside class="sidebar">
+
+            <!-- Skills Box Matrix -->
+            <section class="box">
+                <h2>Core Expertise</h2>
+                
+                <div class="skill-group">
+                    <h3>Technical Engine</h3>
+                    <div class="skill-badges">
+                        <span class="badge">Python</span>
+                        <span class="badge">R</span>
+                        <span class="badge">Java</span>
+                        <span class="badge">Agisoft</span>
+                        <span class="badge">ArcGis Pro</span>
+                        <span class="badge">Git version management</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <h3>Academic</h3>
+                    <div class="skill-badges">
+                        <span class="badge">Data science/analytics</span>
+                        <span class="badge">Machine learning / Artificial intelligence</span>
+                        <span class="badge">Spatial anlaysis</span>
+                        <span class="badge">Remote sensing classification</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Checklist Box -->
+            <section class="box">
+                <h2>Academic Roles</h2>
+                <ul class="sidebar-list">
+                    <li><strong>Student</strong><br><small style="color:#64748b;">University Lab Location (2025)</small></li>
+                </ul>
+            </section>
+
+            <!-- Certification Box -->
+            <section class="box">
+                <h2>Accreditations</h2>
+                <ul class="sidebar-list">
+                    <li>-</li>
+                    <li>-</li>
+                </ul>
+            </section>
+
+            <!-- Instant Contact Access Box -->
+            <section class="box">
+                <h2>Network Channels</h2>
+                <div class="contact-links">
+                    <a href="mailto:your.niekwels@live.nl" class="contact-link-item">📧 niek.wels@live</a>
+                    <a href="https://linkedin.com/in/niekwels" target="_blank" class="contact-link-item">🔗 linkedin.com/in/NiekWels</a>
+                    <a href="Images/CV_Niek_Wels.pdf" target="_blank" class="contact-link-item">📄 Download CV</a>
+                    <a href="https://github.com/Niek-Wels" target="_blank" class="contact-link-item">💻 github.com/niek-wels</a>
+                    <div class="contact-link-item" style="cursor: default;">📍Wageningen, Netherlands </div>
+                </div>
+            </section>
+
+        </aside>
+    </div>
+
+    <!-- Page Footer -->
+    <footer>
+        <p>&copy; 2026 Niek Wels. Document engineered for modern academic presentation.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

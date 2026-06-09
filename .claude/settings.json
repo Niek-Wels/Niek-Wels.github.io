@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/niekw/Documents/Ingeleverde_Documenten_WUR/Geoscripting/**)"
+    ]
+  }
+}
