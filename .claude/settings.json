@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/niekw/Documents/Ingeleverde_Documenten_WUR/Geoscripting/**)"
+      "Read(//c/Users/niekw/Documents/Ingeleverde_Documenten_WUR/Geoscripting/**)",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
