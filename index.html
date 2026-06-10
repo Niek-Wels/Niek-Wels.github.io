@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic & Research Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
     <style>
         * {
@@ -204,6 +205,47 @@
             overflow: hidden;
         }
 
+        #project-map {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.25;
+        }
+
+        .map-location-label {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.78);
+            color: white;
+            font-size: 0.82rem;
+            padding: 8px 14px 8px 9px;
+            border-radius: 20px;
+            z-index: 100;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(6px);
+            transition: background 0.2s, transform 0.15s;
+            text-decoration: none;
+            user-select: none;
+        }
+        .map-location-label:hover {
+            background: rgba(30, 58, 138, 0.88);
+            transform: translateY(-2px);
+        }
+        .map-location-label .pin-icon {
+            flex-shrink: 0;
+            opacity: 0.9;
+        }
+        .map-location-label .pin-arrow {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-left: 2px;
+        }
+
         .carousel {
             position: relative;
         }
@@ -379,6 +421,12 @@
     </style>
 </head>
 <body>
+<div id="project-map"></div>
+<div class="map-location-label" id="map-label" onclick="scrollToCurrentProject()" title="Go to project">
+    <svg class="pin-icon" width="14" height="18" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg"><path d="M14 0C6.3 0 0 6.3 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.3 21.7 0 14 0z" fill="white"/><circle cx="14" cy="14" r="6" fill="rgba(15,23,42,0.7)"/></svg>
+    <span id="map-label-text"></span>
+    <span class="pin-arrow">↗</span>
+</div>
 
 <div class="container">
 
@@ -436,11 +484,11 @@
             </section>
 
             <!-- Detailed Visual Project Portfolio Box -->
-            <section class="box">
+            <section class="box" id="projects-section">
                 <h2>Selected Research & Projects</h2>
-                
+
                 <!-- Project Node 1 -->
-                <div class="project-card">
+                <div class="project-card" data-area="flevoland">
                     <a class="project-img-link" href="Images/New improved image maup.png" target="_blank">
                         <img class="project-img" src="Images/New improved image maup.png" alt="MAUP Project Visual">
                     </a>
@@ -459,7 +507,7 @@
                 </div>
 
                 <!-- Project Node 2 -->
-                <div class="project-card">
+                <div class="project-card" data-area="wageningen-rhenen">
                     <a class="project-img-link" href="Images/Screenshot_geotools.jpg" target="_blank">
                         <img class="project-img" src="Images/Screenshot_geotools.jpg" alt="Light Rail GeoTools Screenshot">
                     </a>
@@ -476,7 +524,7 @@
                 </div>
 
                 <!-- Project Node 3 -->
-                <div class="project-card">
+                <div class="project-card" data-area="maas-waal">
                     <div class="carousel">
                         <img class="project-img carousel-img" src="Images/braboland view 1.png" alt="Braboland View">
                         <button class="carousel-btn prev" onclick="carousel(this, -1)">&#8249;</button>
@@ -490,7 +538,7 @@
                     <div class="project-details">
                         <div>
                             <h3>Flooding modeling of Land van Maas en Waal</h3>
-                            <p>During the course Spatial Modelling and Statistics (GRS-30306), we modelled how the Municipality of Land van Maas en Waal would flood when a dyke breach takes place, taking into account uncertainties in the height of the landscape and the amount of water flowing in. This creates a more accurate description of flood risk since you cannot always rely on precise digital terrain models.</p>
+                            <p>During the course Spatial Modelling and Statistics (GRS-30306) a Cellular Automata was used to model how the Municipality of Land van Maas en Waal would flood when a dyke breach takes place, taking into account uncertainties in the height of the landscape and the amount of water flowing in. This creates a more accurate description of flood risk since you cannot always rely on precise digital terrain models.</p>
                         </div>
                         <div class="project-tags">
                             <span>Spatial Modelling</span>
@@ -498,8 +546,6 @@
                             <span>Monto Carlo Simulation</span>
                         </div>
                     </div>
-                </div>
-
             </section>
         </main>
 
@@ -525,7 +571,7 @@
                 <div class="skill-group">
                     <h3>Academic skills</h3>
                     <div class="skill-badges">
-                        <span class="badge">Data science/analytics</span>
+                        <span class="badge">Data science / analytics</span>
                         <span class="badge">Machine learning / Artificial intelligence</span>
                         <span class="badge">Spatial analysis</span>
                         <span class="badge">Remote sensing</span>
@@ -623,6 +669,57 @@
         img.src = carouselImages[next];
         dots.forEach(function(d, i) { d.classList.toggle('active', i === next); });
     }
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var nlMap = L.map('project-map', {
+        center: [52.3, 5.3],
+        zoom: 7,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: false
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(nlMap);
+
+    var areas = {
+        'flevoland':         { label: 'Province of Flevoland',  coords: [52.47, 5.55], zoom: 9 },
+        'wageningen-rhenen': { label: 'Wageningen & Rhenen',     coords: [51.97, 5.60], zoom: 11 },
+        'maas-waal':         { label: 'Land van Maas en Waal',   coords: [51.82, 5.55], zoom: 11 }
+    };
+
+    var currentAreaKey = null;
+
+    function showArea(key) {
+        if (key === currentAreaKey) return;
+        currentAreaKey = key;
+        var config = areas[key];
+        if (!config) return;
+        document.getElementById('map-label-text').textContent = config.label;
+        nlMap.setView(config.coords, config.zoom, { animate: true, duration: 0.8 });
+    }
+
+    function scrollToCurrentProject() {
+        if (!currentAreaKey) return;
+        var card = document.querySelector('.project-card[data-area="' + currentAreaKey + '"]');
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    showArea('flevoland');
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) showArea(e.target.dataset.area);
+        });
+    }, { threshold: 0.4 });
+
+    document.querySelectorAll('.project-card[data-area]').forEach(function(c) {
+        observer.observe(c);
+    });
 </script>
 </body>
 </html>
