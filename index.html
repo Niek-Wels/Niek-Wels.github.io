@@ -203,6 +203,51 @@
             overflow: hidden;
         }
 
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 23, 42, 0.5);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: background 0.2s;
+            z-index: 2;
+        }
+
+        .carousel-btn:hover { background: rgba(15, 23, 42, 0.85); }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dot.active { background: white; }
+
 
         .project-img {
             width: 100%;
@@ -355,7 +400,7 @@
             <section class="box">
                 <h2>Brief Abstract / About Me</h2>
                 <p class="about-text">
-                    I am a curious and analytical person who gets a lot of energy from working with people and loves untangling complex problems. Keeping overview in messy situations and spotting efficient opportunities is something that comes naturally to me. With a background in Human Geography and a growing expertise in GIS, I am drawn to how people and their environments shape each other. My real drive is visualising and simplifying complicated things, especially using machine learning to find patterns in spatial data. I like making abstract information accessible in a way that actually helps people.
+                    I am a curious and analytical person who gets a lot of energy from working with people and loves untangling complex problems, and keeping overview in complex situations and spotting efficient opportunities is something that comes naturally to me. With a background in Human Geography and a growing expertise in GIS, I am drawn to how people and their environments form each other. My real drive is visualising and simplifying complicated things, especially using machine learning to find patterns in spatial data. I like making abstract information accessible in a way that actually helps people.
                 </p>
             </section>
 
@@ -401,7 +446,7 @@
                     <div class="project-details">
                         <div>
                             <h3>What effects does the Modifiable Areal Unit Problem (MAUP) have on Soil Organic Carbon data in Flevoland?</h3>
-                            <p>Investigated how aggregating soil organic carbon (SOC) data from 30m pixels to larger spatial units introduces systematic errors. Analysed both scale effects, at 5000m resolution nearly 50% of data variance is lost, following a roughly exponential relationship, and zonal effects, where random polygon boundaries cause certain agricultural fields to be consistently over, or underestimated. Results directly impact farmer subsidies and carbon credit calculations, highlighting why policymakers must be cautious with spatially aggregated data.</p>
+                            <p> For the course Geoscripting (GRS33806)Investigated how aggregating soil organic carbon (SOC) data from 30m pixels to larger spatial units introduces systematic errors. Analysed both scale effects, at 5000m resolution nearly 50% of data variance is lost, following a roughly exponential relationship, and zonal effects, where random polygon boundaries cause certain agricultural fields to be consistently over, or underestimated. Results directly impact farmer subsidies and carbon credit calculations, highlighting why policymakers must be cautious with spatially aggregated data.</p>
                         </div>
                         <div class="project-tags">
                             <span>Python</span>
@@ -420,11 +465,36 @@
                     <div class="project-details">
                         <div>
                             <h3>Light Rail Project Wageningen Rhenen</h3>
-                            <p>Looked for the cheapest route to build a lightrail while taking environemental constraints into account</p>
+                            <p>For the course GeoTools (GRS20806), looked for the cheapest route to build a light rail while taking environmental constraints into account. This project made sure to keep good structure due to the many map layers which needed to be combined, and to be able to recreate the same map when a small thing along the way needed to be changed.</p>
                         </div>
                         <div class="project-tags">
                             <span>ArcGIS Pro</span>
                             <span>Toolboxes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Node 3 -->
+                <div class="project-card">
+                    <div class="carousel">
+                        <img class="project-img carousel-img" src="Images/braboland view 1.png" alt="Braboland View">
+                        <button class="carousel-btn prev" onclick="carousel(this, -1)">&#8249;</button>
+                        <button class="carousel-btn next" onclick="carousel(this, 1)">&#8250;</button>
+                        <div class="carousel-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                    <div class="project-details">
+                        <div>
+                            <h3>Flooding modeling of Land van Maas en Waal</h3>
+                            <p>During the course Spatial Modelling and Statistics (GRS-30306), we modelled how the Municipality of Land van Maas en Waal would flood when a dyke breach takes place, taking into account uncertainties in the height of the landscape and the amount of water flowing in. This creates a more accurate description of flood risk since you cannot always rely on precise height measurement data.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span>Spatial Modelling</span>
+                            <span>Netlogo</span>
+                            <span>Monto Carlo Simulation</span>
                         </div>
                     </div>
                 </div>
@@ -519,9 +589,8 @@
                 <h2>Network Channels</h2>
                 <div class="contact-links">
                     <a href="mailto:your.niekwels@live.nl" class="contact-link-item">📧 niek.wels@live.nl</a>
-                    <a href="https://linkedin.com/in/niekwels" target="_blank" class="contact-link-item">🔗 linkedin.com/in/niek-wels</a>
-                    <a href="Images/CV_Niek_Wels.pdf" target="_blank" class="contact-link-item">📄 Download CV</a>
-                    <a href="https://github.com/Niek-Wels" target="_blank" class="contact-link-item">💻 github.com/niek-wels</a>
+                    <a href="https://www.linkedin.com/in/niek-wels" target="_blank" class="contact-link-item">🔗 linkedin: Niek Wels</a>
+                    <a href="Images/CV_Niek_Wels.pdf" target="_blank" class="contact-link-item">📄 Download CV Niek Wels</a>
                     <div class="contact-link-item" style="cursor: default;">📍Wageningen, Netherlands </div>
                 </div>
             </section>
@@ -536,5 +605,23 @@
 
 </div>
 
+<script>
+    var carouselImages = [
+        'Images/braboland view 1.png',
+        'Images/braboland view 2.png',
+        'Images/braboland view 3.png'
+    ];
+
+    function carousel(btn, dir) {
+        var c = btn.closest('.carousel');
+        var img = c.querySelector('.carousel-img');
+        var dots = c.querySelectorAll('.dot');
+        var current = parseInt(c.dataset.index || 0);
+        var next = (current + dir + carouselImages.length) % carouselImages.length;
+        c.dataset.index = next;
+        img.src = carouselImages[next];
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === next); });
+    }
+</script>
 </body>
 </html>
