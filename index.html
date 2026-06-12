@@ -250,39 +250,6 @@
             opacity: 0.25;
         }
 
-        .map-location-label {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(15, 23, 42, 0.78);
-            color: white;
-            font-size: 0.82rem;
-            padding: 8px 14px 8px 9px;
-            border-radius: 20px;
-            z-index: 100;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            border: 1px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(6px);
-            transition: background 0.2s, transform 0.15s;
-            text-decoration: none;
-            user-select: none;
-        }
-        .map-location-label:hover {
-            background: rgba(30, 58, 138, 0.88);
-            transform: translateY(-2px);
-        }
-        .map-location-label .pin-icon {
-            flex-shrink: 0;
-            opacity: 0.9;
-        }
-        .map-location-label .pin-arrow {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-left: 2px;
-        }
 
         .carousel {
             position: relative;
@@ -482,11 +449,6 @@
 </head>
 <body>
 <div id="project-map"></div>
-<div class="map-location-label" id="map-label" onclick="scrollToCurrentProject()" title="Go to project">
-    <svg class="pin-icon" width="14" height="18" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg"><path d="M14 0C6.3 0 0 6.3 0 14c0 10.5 14 22 14 22S28 24.5 28 14C28 6.3 21.7 0 14 0z" fill="white"/><circle cx="14" cy="14" r="6" fill="rgba(15,23,42,0.7)"/></svg>
-    <span id="map-label-text"></span>
-    <span class="pin-arrow">↗</span>
-</div>
 
 <div class="container">
 
@@ -495,7 +457,7 @@
         <img src="Images/Niek.jpeg" alt="Niek Wels" class="header-photo">
         <div class="header-text">
             <h1>Niek Wels</h1>
-            <p>Student | Geograhic Information Science</p>
+            <p>Student | Geographic Information Science</p>
         </div>
     </header>
 
@@ -521,8 +483,8 @@
                     <!-- Expected Graduation Highlight -->
                     <div class="timeline-item expected">
                         <div class="time-period">Expected Graduation: June 2027</div>
-                        <div class="timeline-title">MSc Geograhic Information Science</div>
-                        <div class="timeline-institution">Wageningen Univeristy & Research, Gelderland</div>
+                        <div class="timeline-title">MSc Geographic Information Science</div>
+                        <div class="timeline-institution">Wageningen University & Research, Gelderland</div>
                     </div>
 
                     <!-- Current/Previous Degree -->
@@ -584,12 +546,12 @@
                             </div>
                             <div class="project-details">
                                 <div>
-                                    <h3>Flooding modeling of Land van Maas en Waal</h3>
+                                    <h3>Flooding Modeling of Land van Maas en Waal</h3>
                                     <p>During the course Spatial Modelling and Statistics (GRS-30306) a Cellular Automata was used to model how the Municipality of Land van Maas en Waal would flood when a dyke breach takes place, taking into account uncertainties in the height of the landscape and the amount of water flowing in. This creates a more accurate description of flood risk since you cannot always rely on precise digital terrain models.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span>Spatial Modelling</span>
-                                    <span>Netlogo</span>
+                                    <span>NetLogo</span>
                                     <span>Monte Carlo Simulation</span>
                                 </div>
                             </div>
@@ -657,7 +619,7 @@
                         <span class="badge">R</span>
                         <span class="badge">Java</span>
                         <span class="badge">Agisoft</span>
-                        <span class="badge">ArcGis Pro</span>
+                        <span class="badge">ArcGIS Pro</span>
                         <span class="badge">Git version management</span>
                     </div>
                 </div>
@@ -666,9 +628,9 @@
                     <h3>Academic skills</h3>
                     <div class="skill-badges">
                         <span class="badge">Data science / analytics</span>
-                        <span class="badge">Machine learning / Artificial intelligence</span>
-                        <span class="badge">Spatial analysis</span>
-                        <span class="badge">Remote sensing</span>
+                        <span class="badge">Machine Learning / Artificial Intelligence</span>
+                        <span class="badge">Spatial Analysis</span>
+                        <span class="badge">Remote Sensing</span>
                         <span class="badge">Economic and Human Geography</span>
 
                     </div>
@@ -729,8 +691,8 @@
             <section class="box">
                 <h2>Network Channels</h2>
                 <div class="contact-links">
-                    <a href="mailto:your.niekwels@live.nl" class="contact-link-item">📧 niek.wels@live.nl</a>
-                    <a href="https://www.linkedin.com/in/niek-wels" target="_blank" class="contact-link-item">🔗 linkedin: Niek Wels</a>
+                    <a href="mailto:niekwels@live.nl" class="contact-link-item">📧 niekwels@live.nl</a>
+                    <a href="https://www.linkedin.com/in/niek-wels" target="_blank" class="contact-link-item">🔗 LinkedIn: Niek Wels</a>
                     <a href="Images/CV_Niek_Wels.pdf" target="_blank" class="contact-link-item">📄 Download CV Niek Wels</a>
                     <div class="contact-link-item" style="cursor: default;">📍Wageningen, Netherlands </div>
                 </div>
@@ -741,7 +703,7 @@
 
     <!-- Page Footer -->
     <footer>
-        <p>&copy; 2026 Niek Wels. Portfolio excerise period 6 first year MGI</p>
+        <p>&copy; 2026 Niek Wels. Portfolio exercise period 6 first year MGI</p>
     </footer>
 
 </div>
@@ -823,15 +785,9 @@
         currentAreaKey = key;
         var config = areas[key];
         if (!config) return;
-        document.getElementById('map-label-text').textContent = config.label;
         nlMap.setView(config.coords, config.zoom, { animate: true, duration: 0.8 });
     }
 
-    function scrollToCurrentProject() {
-        if (!currentAreaKey) return;
-        var card = document.querySelector('.project-card[data-area="' + currentAreaKey + '"]');
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
 
     showArea('flevoland');
 </script>
