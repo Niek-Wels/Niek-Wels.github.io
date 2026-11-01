@@ -25,6 +25,8 @@
         .container {
             max-width: 1100px;
             margin: auto;
+            position: relative;
+            z-index: 1;
         }
 
         /* Portfolio Header Banner */
@@ -250,7 +252,7 @@
         #project-map {
             position: fixed;
             inset: 0;
-            z-index: -1;
+            z-index: 0;
             opacity: 0.25;
         }
 
@@ -303,9 +305,10 @@
 
         .project-img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
-            object-position: center top;
+            height: auto;
+            max-height: 340px;
+            object-fit: contain;
+            background: #f1f5f9;
             display: block;
         }
 
@@ -675,47 +678,50 @@
                     <div class="skill-badges">
                         <span class="badge">Python</span>
                         <span class="badge">R</span>
-                        <span class="badge">Java</span>
-                        <span class="badge">Agisoft</span>
-                        <span class="badge">ArcGIS Pro</span>
-                        <span class="badge">Git version management</span>
+                        <span class="badge">Git version control</span>
                     </div>
                 </div>
 
                 <div class="skill-group">
                     <h3>Academic skills</h3>
                     <div class="skill-badges">
-                        <span class="badge">Data science / analytics</span>
-                        <span class="badge">Machine Learning / Artificial Intelligence</span>
+                        <span class="badge">Deep Learning</span>
+                        <span class="badge">Geospatial Foundation Models</span>
+                        <span class="badge">Graph Convolutional Neural Networks</span>
+                        <span class="badge">Machine Learning (regression / classification)</span>
                         <span class="badge">Spatial Analysis</span>
                         <span class="badge">Remote Sensing</span>
                         <span class="badge">Economic and Human Geography</span>
+                    </div>
+                </div>
 
+                <div class="skill-group">
+                    <h3>Remote sensing data</h3>
+                    <div class="skill-badges">
+                        <span class="badge">Sentinel-1 / 2</span>
+                        <span class="badge">Aerial imagery</span>
+                        <span class="badge">LiDAR</span>
                     </div>
                 </div>
 
                 <div class="skill-group">
                     <h3>Python packages</h3>
                     <div class="skill-badges">
+                        <span class="badge">PyTorch</span>
+                        <span class="badge">scikit-learn</span>
+                        <span class="badge">GDAL</span>
+                        <span class="badge">rasterio</span>
                         <span class="badge">GeoPandas</span>
                         <span class="badge">Shapely</span>
-                        <span class="badge">Rasterio</span>
-                        <span class="badge">Scikit-Learn</span>
-                        <span class="badge">TensorFlow</span>
-                        <span class="badge">PyTorch</span>
-                        <span class="badge">Keras</span>
                     </div>
                 </div>
 
                 <div class="skill-group">
                     <h3>R packages</h3>
                     <div class="skill-badges">
-                        <span class="badge">sf</span>
                         <span class="badge">terra</span>
-                        <span class="badge">raster</span>
-                        <span class="badge">tmap</span>
-                        <span class="badge">ggplot2</span>
-                        <span class="badge">sp</span>
+                        <span class="badge">stars</span>
+                        <span class="badge">sf</span>
                     </div>
                 </div>
             </section>
@@ -739,6 +745,7 @@
                 <ul class="sidebar-list">
                     <li>Adaptive</li>
                     <li>Eager to learn</li>
+                    <li>Learns quickly and easily</li>
                     <li>People-oriented</li>
                     <li>Socially skilled</li>
                     <li>Stress resistant</li>
@@ -823,9 +830,14 @@
         dragging: false
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
-        subdomains: 'abcd',
+    // Esri light grey basemap + labels (no API key needed; CARTO now shows an "API key required" watermark)
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Basemap &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
+        maxNativeZoom: 16,
+        maxZoom: 19
+    }).addTo(nlMap);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 16,
         maxZoom: 19
     }).addTo(nlMap);
 
