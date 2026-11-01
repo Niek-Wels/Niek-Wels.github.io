@@ -313,6 +313,20 @@
             justify-content: space-between;
         }
 
+        .status-badge {
+            display: inline-block;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
         .project-details h3 {
             color: #1e3a8a;
             font-size: 1.2rem;
@@ -557,10 +571,50 @@
                             </div>
                         </div>
 
+                        <!-- Project 5 -->
+                        <div class="project-card" data-area="gelderland">
+                            <a class="project-img-link" href="Images/CGI.png" target="_blank">
+                                <img class="project-img" src="Images/CGI.png" alt="Generalized road polygons of a roundabout compared with the BRT">
+                            </a>
+                            <div class="project-details">
+                                <div>
+                                    <h3>Deep Learning to Generalize Topographic Maps (CGI)</h3>
+                                    <p>For the Academic Consultancy Training of my master's degree, commissioned by CGI, we explored whether deep learning can turn the highly detailed Dutch topographic map (BGT, 1:1.000) into the more general BRT map (1:10.000) without hand-written deterministic rules. To keep full spatial accuracy, a polygon-based approach was used: road polygons were converted into graphs and fed into two Graph-SAGE neural networks, Stage A for selection and aggregation and Stage B for simplification. Trained on Apeldoorn, validated on Arnhem and tested on Wageningen, the model reduced around 62,000 BGT polygons to roughly 10,000, close to the real BRT. Selection and aggregation performed reasonably well, while simplification proved the hardest step, which resulted in concrete recommendations for CGI and Kadaster's BRT.Next project.</p>
+                                </div>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>PyTorch</span>
+                                    <span>Graph Neural Networks</span>
+                                    <span>Map Generalization</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- Right column: Projects 2 & 4 -->
+                    <!-- Right column: Thesis, Projects 2 & 4 -->
                     <div class="projects-col">
+
+                        <!-- MSc Thesis (in progress) -->
+                        <div class="project-card">
+                            <a class="project-img-link" href="Images/cover_grid.png" target="_blank">
+                                <img class="project-img" src="Images/cover_grid.png" alt="Grid of satellite image patches around SBAE sample points">
+                            </a>
+                            <div class="project-details">
+                                <div>
+                                    <span class="status-badge">In the making</span>
+                                    <h3>MSc Thesis: Can a Foundation Model Take Over Human Annotation in Sample-Based Area Estimation?</h3>
+                                    <p>Land-cover change is a major source of greenhouse gas emissions, and programmes such as the UN's REDD+ require countries to report it with Sample-Based Area Estimation (SBAE). SBAE gives unbiased area estimates with a confidence interval, but rare events like land-cover change need many sample points, and labelling all of them by hand with high-resolution imagery is slow and often not feasible within reporting deadlines. In my thesis I fine-tune a Vision Transformer based geospatial foundation model, pretrained on large amounts of satellite imagery, to classify land-cover change at SBAE sample points. Using the model's confidence (the margin between the two most likely classes), I assess whether confidence reflects accuracy, so that confident points can be labelled by the model and only uncertain points still need a human interpreter. The aim is to reduce annotation costs without lowering label quality.</p>
+                                </div>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>PyTorch</span>
+                                    <span>Foundation Models</span>
+                                    <span>Vision Transformers</span>
+                                    <span>Remote Sensing</span>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- Project 2 -->
                         <div class="project-card" data-area="wageningen-rhenen">
@@ -692,7 +746,7 @@
                 <h2>Network Channels</h2>
                 <div class="contact-links">
                     <a href="mailto:niekwels@live.nl" class="contact-link-item">📧 niekwels@live.nl</a>
-                    <a href="https://www.linkedin.com/in/niek-wels" target="_blank" class="contact-link-item">🔗 LinkedIn: Niek Wels</a>
+                    <a href="www.linkedin.com/in/niek-wels-2b253332a" target="_blank" class="contact-link-item">🔗 LinkedIn: Niek Wels</a>
                     <a href="Images/CV_Niek_Wels.pdf" target="_blank" class="contact-link-item">📄 Download CV Niek Wels</a>
                     <div class="contact-link-item" style="cursor: default;">📍Wageningen, Netherlands </div>
                 </div>
@@ -775,7 +829,8 @@
         'flevoland':         { label: 'Province of Flevoland',  coords: [52.47, 5.55], zoom: 10 },
         'wageningen-rhenen': { label: 'Wageningen & Rhenen',     coords: [51.97, 5.60], zoom: 11 },
         'maas-waal':         { label: 'Land van Maas en Waal',   coords: [51.82, 5.55], zoom: 11 },
-        'Utrecht':           { label: 'Province of Utrecht',     coords: [52.09, 5.12], zoom: 10 }
+        'Utrecht':           { label: 'Province of Utrecht',     coords: [52.09, 5.12], zoom: 10 },
+        'gelderland':        { label: 'Apeldoorn, Arnhem & Wageningen', coords: [52.08, 5.80], zoom: 10 }
     };
 
     var currentAreaKey = '';
